@@ -1,4 +1,4 @@
-type IProps = {
+export type IProps = {
     todo: string,
     setTodo: React.Dispatch<React.SetStateAction<string>>,
     addTodos: ()=> void
