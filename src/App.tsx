@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Input } from "./components/Input";
 import { TodoList } from "./components/TodoList";
@@ -12,6 +12,19 @@ export type Todos = {
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todos[]>([]);
+
+
+    useEffect(() => {
+      const storedTodos = localStorage.getItem("todos");
+      if (storedTodos) {
+        setTodos(JSON.parse(storedTodos));
+      }
+    }, []);
+  
+    useEffect(() => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
+  
 
   const addTodos = () => {
     if (todo) {
